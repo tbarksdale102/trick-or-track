@@ -13,3 +13,7 @@ Keep Host and same-origin JSON checks, body limits, TLS verification, redirect r
 An uncertain Jira create must not be blindly retried: preserve draft/action status so retries cannot create duplicates. Ambiguous mappings remain review items. Credential retention and daily refresh require Windows; do not claim Linux support or replace encryption with plaintext storage.
 
 Ignore `.runtime/` in Git. Tests create and clean their own ticket drafts. The app has no database server or background-service prerequisite beyond its own process.
+
+## GitHub
+
+`github.mjs` uses a fixed `https://api.github.com` origin and read-only calls for repository metadata, issues, pulls, commits and trees. Validate owner, repo, page and response shape. Do not follow upstream pagination URLs or store tokens. The same-origin JSON route is `/api/github/page`. `github-ui.js` keeps snapshots separately in IndexedDB, promotes only completed imports, and supports local requirement linking through `github-links.js`. A truncated file tree is explicitly partial. GitHub references are context, not verification evidence; exports retain their links. Live API validation requires the environment's network allowlist and should be reported separately from fixture tests.

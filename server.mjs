@@ -1,14 +1,20 @@
+import {githubPage} from './github.mjs';
 import http from 'node:http';
 import {readFile} from 'node:fs/promises';
 import {page} from './jira.mjs';
 import {ticketAction} from './tickets.mjs';
 import {status,snapshot,configure,runDue,startScheduler} from './schedule.mjs';
 startScheduler();
-const files={'/':'index.html','/app.js':'app.js','/development.js':'development.js','/domain.js':'domain.js','/styles.css':'styles.css','/jira-ui.js':'jira-ui.js','/tickets-ui.js':'tickets-ui.js','/reconcile.js':'../reconcile.mjs'};
+const files={'/':'index.html','/app.js':'app.js','/github-ui.js':'github-ui.js','/github-links.js':'github-links.js','/development.js':'development.js','/domain.js':'domain.js','/styles.css':'styles.css','/jira-ui.js':'jira-ui.js','/tickets-ui.js':'tickets-ui.js','/reconcile.js':'../reconcile.mjs'};
 http.createServer(async(req,res)=>{
  const pathname=new URL(req.url,'http://localhost').pathname;
  res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
  if(!['127.0.0.1:4173','localhost:4173'].includes(req.headers.host)){res.writeHead(403);return res.end('Invalid host');}
+ if(pathname==='/api/github/page'){
+  res.setHeader('Content-Type','application/json');
+  if(req.method!=='POST'||req.headers.origin!==`http://${req.headers.host}`||req.headers['content-type']!=='application/json'){res.writeHead(403);return res.end(JSON.stringify({error:'Same-origin JSON requests required.'}));}
+  try{let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>16000)throw Error('GitHub request too large.');}res.end(JSON.stringify(await githubPage(JSON.parse(raw))));}catch(e){res.writeHead(400);res.end(JSON.stringify({error:e.message}));}return;
+ }
  if(pathname==='/api/jira/tickets'){
   res.setHeader('Content-Type','application/json');
   if(req.method!=='POST'||req.headers.origin!==`http://${req.headers.host}`||req.headers['content-type']!=='application/json'){res.writeHead(403);return res.end(JSON.stringify({error:'Same-origin JSON requests required.'}));}

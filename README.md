@@ -38,3 +38,11 @@ Project-specific guidelines, task records, and Codex skills are configured with 
 ## Implementation readiness and task export
 
 Select a requirement to save a delivery owner, acceptance criteria, implementation scope and system context. Complete all six readiness checks, then review and download a Trellis task ZIP. See [import instructions](docs/trellis.md#export-a-requirement-as-a-task). Export does not execute agents or write Jira issues.
+
+## GitHub integration
+
+Open GitHub in the navigation and enter a repository owner/name. Import issues, pull requests, commits and a file inventory, then link references to an RPM. Requirement details show linked references, which are also included in reviewed Trellis exports. Imports are read-only; no GitHub issues are created or updated.
+
+Public repositories support unauthenticated access (subject to rate limits). Private repositories need a fine-grained token with repository Metadata, Contents, Issues and Pull requests read permissions. Tokens are cleared after import and never persisted. Import snapshots live separately in IndexedDB, and failed/cancelled refreshes preserve the previous snapshot. Do not share private repository snapshots or exported requirement data without review.
+
+Cloud access requires `api.github.com` in the environment network allowlist. This integration supports GitHub.com, not GitHub Enterprise Server. File inventories may be marked partial when GitHub truncates its tree response; they are not architecture scans. Each list import is limited to 100 pages. Linked references do not automatically verify a requirement or alter Jira status.

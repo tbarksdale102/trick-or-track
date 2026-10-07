@@ -1,0 +1,1 @@
+Read-only GitHub API adapter with native fetch, same-origin JSON route, IndexedDB snapshots, existing sample-state reference links, and escaped HTML UI. Follow fixed-origin numeric pagination; never follow arbitrary upstream links. Imported tree truncation is explicit. Legacy requirements without GitHub links remain compatible.

@@ -1,0 +1,1 @@
+Add github.mjs and browser modules; integrate navigation and detail references; extend Trellis export; test API adapters with injected requests and browser flows with controlled fixtures; document live network prerequisite.

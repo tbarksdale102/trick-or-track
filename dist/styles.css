@@ -6,3 +6,5 @@
 .brand span{font-size:21px;letter-spacing:-.6px}.brand{gap:8px}@media(min-width:761px) and (max-width:1050px){.brand span{font-size:17px}.brand small{font-size:9px;letter-spacing:1px}}
 
 .development-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:32px;padding:24px}.readiness-list{list-style:none;padding:0;margin:20px 0}.readiness-list li{margin:14px 0}.readiness-list .ready{color:#28734c;font-weight:700}.readiness-list .missing{color:#a35b25;font-weight:700}.export-preview{max-height:45vh;overflow:auto;white-space:pre-wrap;background:#f8f4f0;padding:18px;font-size:13px;margin:18px 0}#development-form textarea{width:100%}@media(max-width:850px){.development-grid{grid-template-columns:1fr}}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
