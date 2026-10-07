@@ -4,7 +4,7 @@ import {page} from './jira.mjs';
 import {ticketAction} from './tickets.mjs';
 import {status,snapshot,configure,runDue,startScheduler} from './schedule.mjs';
 startScheduler();
-const files={'/':'index.html','/app.js':'app.js','/domain.js':'domain.js','/styles.css':'styles.css','/jira-ui.js':'jira-ui.js','/tickets-ui.js':'tickets-ui.js','/reconcile.js':'../reconcile.mjs'};
+const files={'/':'index.html','/app.js':'app.js','/development.js':'development.js','/domain.js':'domain.js','/styles.css':'styles.css','/jira-ui.js':'jira-ui.js','/tickets-ui.js':'tickets-ui.js','/reconcile.js':'../reconcile.mjs'};
 http.createServer(async(req,res)=>{
  const pathname=new URL(req.url,'http://localhost').pathname;
  res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');

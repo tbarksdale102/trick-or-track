@@ -40,4 +40,12 @@ Generated `.codex/` configuration includes native agents and hooks. Automatic in
 
 Upstream Trellis is AGPL-3.0: https://github.com/mindfold-ai/Trellis/blob/main/LICENSE . Its generated tooling is versioned here; adoption does not assert that the application was relicensed. Review upstream licensing before redistributing the bundled tooling in a commercial product or embedding Trellis in a hosted service.
 
-This setup adds no live Jira access, automated external writes, or requirements-to-Trellis export UI.
+This setup adds no live Jira access or automated external writes.
+
+## Export a requirement as a task
+
+Open Requirements and select an RPM. In Implementation readiness, enter a delivery owner, measurable acceptance criteria (one per line), implementation scope and associated system. Source/revision and Requirement/Initiative links must also exist; resolve missing delivery links through the existing local reconciliation flow. Save the plan, review the export, then download the task ZIP.
+
+Extract into this configured repository only after checking that `.trellis/tasks/<rpm>-r<revision>/` does not already exist. Read `IMPORT-INSTRUCTIONS.txt`, validate the task with the Trellis task CLI, and assign a developer before implementation. The export includes a PRD, task metadata, traceability data and implementation/review context manifests. It does not execute agents, modify Jira, or establish requirement verification. Use `python` instead of `python3` on Windows.
+
+The export contains the local sample workspace text, owner and criteria. Review its contents before sharing; do not enter secrets or sensitive customer requirements.

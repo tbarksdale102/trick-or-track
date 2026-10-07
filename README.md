@@ -34,3 +34,7 @@ Keep `.runtime/`, browser exports, and credentials private. Runtime data is excl
 ## AI development with Trellis
 
 Project-specific guidelines, task records, and Codex skills are configured with Trellis 0.6.17. See [the development guide](docs/trellis.md). Trellis is not required to run the application.
+
+## Implementation readiness and task export
+
+Select a requirement to save a delivery owner, acceptance criteria, implementation scope and system context. Complete all six readiness checks, then review and download a Trellis task ZIP. See [import instructions](docs/trellis.md#export-a-requirement-as-a-task). Export does not execute agents or write Jira issues.

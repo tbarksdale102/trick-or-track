@@ -6,6 +6,6 @@ Preserve RPM identifier, original text, source reference, and revision. Creating
 
 Sample workspace actions affect browser data only. Imported Jira tickets are separate. Real ticket writes require explicit user review; configured automatic writes require explicit rules. Unknown or ambiguous mappings stay review-only.
 
-Current limits: no real repository scanning, government document parsing, multi-user collaboration, production deployment, or Trellis task export UI. Trellis adoption is a development workflow, not a new application feature.
+Current limits: no real repository scanning, government document parsing, multi-user collaboration, production deployment. Trellis also supports a local reviewed task ZIP export from requirement details.
 
-For a future export feature, define acceptance criteria and identifier mapping before implementation; do not assume Trellis specs are certification or verification evidence.
+Task export requires source/revision, Requirement and Initiative links, delivery owner, acceptance criteria, registered system and scope. Export preserves trace identifiers and does not change requirement verification or Jira status. Plans persist in existing browser state; legacy records without a plan stay readable. Task packages contain no credentials and must not overwrite existing tasks on import.
