@@ -63,3 +63,33 @@ Added persisted planning fields, six readiness gates, reviewed task ZIP and 14-s
 ### Next Steps
 
 - Download v2 presentation; review exported task before assigning a developer.
+
+
+## Session 3: GitHub repository context integration
+<!-- trellis-session: v=2 fp=c6087e63df7899ef -->
+
+**Date**: 2026-10-07
+**Task**: GitHub repository context integration
+**Branch**: `main`
+
+### Summary
+
+Read-only GitHub imports, local requirement links and Trellis export context.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `c0d4f59` | Add read-only GitHub context import and requirement traceability |
+
+### Testing
+
+- [OK] 32 Node tests; browser fixture import/search/link/persistence/unlink/failure retention; HTTP origin checks passed.
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- Review and save api.github.com network addition, then publish; live API access remains unverified due to network denial.
