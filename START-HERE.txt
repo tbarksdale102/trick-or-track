@@ -1,0 +1,44 @@
+TRICK OR TRACK — SHAREABLE WINDOWS PROTOTYPE
+
+1. Extract this ZIP into a folder you own (do not run inside the ZIP).
+2. Install Node.js 22 or newer from https://nodejs.org if not installed.
+3. Double-click Start-Trick-or-Track.cmd.
+4. Open http://127.0.0.1:4173 in your browser.
+5. Keep the server window open. Close it or press Ctrl+C to stop.
+
+No npm dependency installation is needed. Node.js is not bundled.
+If port 4173 is already in use, stop the other copy before starting.
+
+WHAT IS INCLUDED
+Sample RPMs, Requirements, Initiatives, Epics, architecture diagrams,
+Jira ticket import, ticket creation, and configurable daily reconciliation.
+
+CONNECT YOUR OWN JIRA
+Open Jira in the navigation. Enter your site URL, project key, account email,
+and API token. The package contains no preconfigured account or credentials.
+Imported tickets are separate from the sample workspace. Review ticket
+creation before submitting: it creates a real Jira issue.
+
+DAILY REFRESH
+Optional: enable encrypted credential retention and configure your exact
+Jira issue/link types. Daily refresh requires this Windows computer and
+the local server to be running. Missed work is checked on server restart.
+Windows account protection encrypts the retained token. Automatic writes
+must be explicitly configured; uncertain mappings remain review items.
+
+DATA AND SHARING
+Browser storage holds sample edits and manual imports. The .runtime folder,
+created when used, holds drafts, scheduled imports, encrypted credentials,
+and action history. Keep it private. If you send this app onward, exclude
+.runtime and any exported data. Cloud-synced folders can sync these files.
+Do not expose this prototype's server to the internet.
+
+LIMITATIONS
+This is a local prototype, not a production deployment or signed installer.
+Architecture diagrams use sample manifests; real repository scanning and
+government document parsing are not implemented. Some Jira required fields
+may need Jira's native editor. Assignee fields use account IDs/usernames.
+
+DEVELOPMENT
+Application code is included. Run tests with:
+node --test tests/domain.test.mjs tests/jira.test.mjs tests/automation.test.mjs tests/tickets.test.mjs

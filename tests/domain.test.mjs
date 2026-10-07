@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {seed,findings,apply,importRpm,generate} from '../dist/domain.js';
+test('coverage corrections are idempotent and initiative creation requires a Requirement',()=>{const s=seed();assert.equal(findings(s).length,7);assert.throws(()=>apply(s,'init:RPM-004'),/Requirement first/);apply(s,'req:RPM-004');const key=s.rpms[3].req;assert.equal(apply(s,'req:RPM-004'),false);assert.equal(s.rpms[3].req,key);apply(s,'init:RPM-004');assert.ok(s.rpms[3].initiative);});
+test('orphan mapping rejects invalid initiatives without mutating the Epic',()=>{const s=seed();assert.throws(()=>apply(s,'epic:EPIC-307','INIT-NO'));assert.equal(s.epics.at(-1).initiative,null);apply(s,'init:RPM-003');apply(s,'epic:EPIC-307',s.rpms[2].initiative);assert.ok(!findings(s).some(f=>f.type==='epic'));});
+test('import retains source and rejects duplicate identifiers',()=>{const s=seed(),input={id:'RPM-006',title:'New system',source:'Document §4',text:'The contractor shall deliver a new system.',revision:'1'};importRpm(s,input);assert.throws(()=>importRpm(s,input),/already exists/);assert.equal(s.rpms.length,6);assert.equal(findings(s).filter(f=>f.target==='RPM-006').length,2);});
+test('diagram coverage becomes stale when source revision changes',()=>{const s=seed();const d=generate(s,'mission');assert.match(d.source,/c0 --> c1/);assert.ok(!findings(s).some(f=>f.id==='diagram:mission'));s.systems[0].commit='changed';assert.equal(findings(s).find(f=>f.id==='diagram:mission').title,'Stale architecture');});

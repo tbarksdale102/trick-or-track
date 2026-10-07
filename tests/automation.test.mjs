@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {autoReconcile} from '../auto-reconcile.mjs';
+import {fetchSnapshot} from '../schedule.mjs';
+import {reconcile} from '../reconcile.mjs';
+const config={kind:'cloud',url:'https://example.atlassian.net',email:'a@example.com',token:'test',rules:{enabled:true,requirementType:'Requirement',initiativeType:'Initiative',epicType:'Epic',project:'SCRUM',equivalenceLink:'Implements',epicLink:'Planned parent'}};
+const req={id:'1',key:'SCRUM-1',type:'Requirement',summary:'Build system',links:[],labels:[]};
+test('creates once and resumes linking without duplicate creation',async()=>{const ledger={};let creates=0;const request=async(c,path)=>{if(path.includes('?'))return {fields:{}};if(path==='/issue'){creates++;return {key:'SCRUM-2'};}return {};};const first=await autoReconcile(config,[req],ledger,async()=>{},request);assert.equal(first.actions.length,2);await autoReconcile(config,[req],ledger,async()=>{},request);assert.equal(creates,1);});
+test('uncertain creation is never blindly retried',async()=>{const ledger={};let creates=0;const request=async(c,path)=>{if(path.includes('?'))return {fields:{}};creates++;throw Error('timeout');};await autoReconcile(config,[req],ledger,async()=>{},request);const again=await autoReconcile(config,[req],ledger,async()=>{},request);assert.equal(creates,1);assert.match(again.review[0].reason,/uncertain/);});
+test('multiple candidate parents remain review only',async()=>{const epic={id:'3',key:'SCRUM-3',type:'Epic',links:[{type:'Planned parent',direction:'outward',key:'SCRUM-4'},{type:'Planned parent',direction:'outward',key:'SCRUM-5'}]},init=key=>({key,type:'Initiative',links:[]});const result=await autoReconcile(config,[epic,init('SCRUM-4'),init('SCRUM-5')],{},async()=>{},async()=>assert.fail('must not write'));assert.match(result.review[0].reason,/Multiple/);});
+test('hierarchy reconciliation distinguishes out-of-scope parents',()=>{const result=reconcile([{key:'E-1',id:'1',type:'Epic',parent:'I-2'}]);assert.match(result.findings[0].reason,/outside/);assert.equal(result.mappings.length,0);});
+test('scheduled import rejects pagination loops',async()=>{await assert.rejects(fetchSnapshot({},async()=>({site:'x',issues:[],cursor:'repeat'})),/Repeated/);});
