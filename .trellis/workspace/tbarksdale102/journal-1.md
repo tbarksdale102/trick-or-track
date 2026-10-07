@@ -33,3 +33,33 @@ Configured Trellis 0.6.17 for Codex; populated frontend, backend and product gui
 ### Next Steps
 
 - Use Trellis tasks for future features; automatic Codex hook injection remains optional and unverified.
+
+
+## Session 2: Requirement readiness and Trellis export v2
+<!-- trellis-session: v=2 fp=ad7b7ad81d94e1f8 -->
+
+**Date**: 2026-10-07
+**Task**: Requirement readiness and Trellis export v2
+**Branch**: `main`
+
+### Summary
+
+Added persisted planning fields, six readiness gates, reviewed task ZIP and 14-slide v2 showcase.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `d814d2e` | Add requirement readiness and reviewed Trellis task export with v2 showcase |
+
+### Testing
+
+- [OK] 23 Node tests, browser save/reload and download, ZIP CRC/extraction and Trellis task validation passed.
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- Download v2 presentation; review exported task before assigning a developer.
