@@ -30,3 +30,7 @@ The sample workspace runs without Jira credentials. Live Jira import and ticket 
 Encrypted credential retention and daily scheduled refresh require Windows account protection and are unavailable on Linux. Manual Jira operations and the sample workspace do not use that helper.
 
 Keep `.runtime/`, browser exports, and credentials private. Runtime data is excluded from Git. See `START-HERE.txt` for the original prototype instructions and limitations.
+
+## AI development with Trellis
+
+Project-specific guidelines, task records, and Codex skills are configured with Trellis 0.6.17. See [the development guide](docs/trellis.md). Trellis is not required to run the application.
